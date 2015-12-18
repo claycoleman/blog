@@ -1,0 +1,6 @@
+*.pyc
+media/
+app/migrations/
+all.json
+local.py
+..bfg-report/

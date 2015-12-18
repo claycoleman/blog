@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    {{post.title}}
+{% endblock title %}
+
+
+{% block header-class %}normal{% endblock header-class %}
+
+{% block swatch-color %}white{% endblock swatch-color %}
+
+{% block content %}
+<article>
+  
+    <section id="two" class="section swatch-white">
+        <div class="container">
+            <div class="row element-normal-top element-normal-bottom">
+                <div class="col-md-12">
+    <h1>Edit {{request.user.authorprofile.name}}'s profile</h1>
+    <form action="{% url 'edit_author_info' %}" method='POST'>
+    {% csrf_token %}
+    Username:<br>
+    {{user_form.username}}
+    <a target="_blank" href="{% url 'password_change' %}">Change your password</a>
+    <br><br>
+    Short Description:<br>
+    {{profile_form.short_description}}<br>
+    Bio:<br>
+    {{profile_form.bio}}<br>
+    <input type="submit" value="Save info"></form>
+    <br>
+    <a href="{% url 'home' %}">Back to home</a>
+
+            </div>
+        </div>
+    </section>
+</article>
+
+    
+{% endblock content %}

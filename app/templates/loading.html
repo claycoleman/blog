@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Hold on one second...
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    
+<article>
+    <section id="two" class="section swatch-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <h1 class="super hairline bordered-normal text-left" style="margin-top: 40px;">Hold on one second...</h1>
+                        </div>
+                    </div>
+                    <hr>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+    <div class="row">
+    <h3>Loading your instagram pictures now!</h3>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<script type="text/javascript">
+    $(function() {
+        $.ajax({
+            type: 'GET',
+            url: '/grab_insta_pics/',
+            success: function(data) {
+                window.location = data[0]
+            }
+        });
+    });
+</script>
+
+{% endblock content %}

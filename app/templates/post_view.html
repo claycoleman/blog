@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    {{post.title}}
+{% endblock title %}
+
+
+{% block header-class %}normal{% endblock header-class %}
+
+{% block swatch-color %}white{% endblock swatch-color %}
+
+{% block content %}
+<article>
+  
+    <section id="two" class="section swatch-white">
+        <div class="container">
+            <div class="row element-normal-top element-normal-bottom">
+                <div class="col-md-12">
+                    <article class=" post post-showinfo">
+                        <div class="post-media text-center">
+                            <div class="figure  element-no-top element-normal-bottom image-filter-none image-filter-onhover fade-in text-center figcaption-middle normalwidth" data-os-animation="none" data-os-animation-delay="0s">
+                                {% if post.post_pic %}
+                                <a href="{{post.post_pic.url}}" class="figure-image magnific block-center" data-links="" target="_self">
+                                    
+                                        <img src="{{post.post_pic.url}}" alt="" class="normalwidth">
+                                   
+                                    <div class="figure-overlay grid-overlay-0">
+                                        <div class="figure-overlay-container">
+                                            <span class="figure-icon">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <g>
+                                    <line display="inline" fill="none" stroke-width="1" stroke-miterlimit="10" x1="50.941" y1="34.953" x2="50.941" y2="65.047"></line>
+                                    <line display="inline" fill="none" stroke-width="1" stroke-miterlimit="10" x1="65.988" y1="50" x2="35.895" y2="50"></line>
+                                </g>
+                            </svg>
+                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                 {% endif %}
+                            </div>
+                        </div>
+                        <header class="post-head">
+                            <h1 class="post-title">
+            {{post.title}}
+        </h1>
+                            <small>
+            by <a href="{% url 'about_family_member' post.author.user.first_name %}">{{post.author.name}}</a> / {{post.likes}} likes  /
+            <a href="#comments" title="Comment on The beauty of the world.">{{ num_comments }} comment{% if num_comments != 1 %}s{% endif %} </a>
+        </small>
+                            <span class="post-icon">
+            <i class="fa fa-file-text"></i>
+        </span>
+                        </header>
+                        <div class="post-body">
+                            
+                            <hr>
+                            <h2>{{post.body_text|safe}}</h2>
+                            <blockquote>
+                                <p>{{post.date_posted}}</p>
+                            </blockquote>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 small-screen-center">
+                                <div class="post-extras">
+                                
+                                    <span class="post-tags">
+                    <i class="fa fa-tags"></i>
+                    {% if post.tag_set %}
+                        {% for tag in post.tag_set.all %}
+                            <a href="{% url 'tag_post_list' tag.name %}" rel="tag">{{tag.name}}</a>{% if forloop.counter < post.tag_set.all|length %}
+                                ,{% endif %}
+                        {% endfor %}
+                    {% else %}
+                        No tags!
+                    {% endif %}
+                    
+                </span>
+                                    <span class="post-link">
+                    <i class="fa fa-comments"></i>
+                    <a href="#comments" title="Comment on The beauty of the world.">{{ num_comments }} comment{% if num_comments != 1 %}s{% endif %} </a>
+                </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-right small-screen-center">
+                                <div class="post-share">
+                                    <small>Share this post:</small>
+                                    <div class="element-no-top inline-block element-no-bottom" data-os-animation="none" data-os-animation-delay="0s">
+                                        <ul class="social-icons social-sm social-simple social-circle ">
+                                            <li>
+                                                <a href="https://twitter.com/share?url=http://omega.oxygenna.com/the-beauty-of-the-natural-world-lies-in-the-details/" target="_blank" style="background-color:#82c9ed;" data-iconcolor="#00acee">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://plus.google.com/share?url=http://omega.oxygenna.com/the-beauty-of-the-natural-world-lies-in-the-details/&amp;images=http://omega.oxygenna.com/wp-content/uploads/2014/04/image-08-normal-150x150.jpg" target="_blank" style="background-color:#82c9ed;"
+                                                data-iconcolor="#dd1812">
+                                                    <i class="fa fa-google-plus"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://www.facebook.com/sharer.php?u=http://omega.oxygenna.com/the-beauty-of-the-natural-world-lies-in-the-details/" target="_blank" style="background-color:#82c9ed;" data-iconcolor="#3b5998">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="//pinterest.com/pin/create/button/?url=http://omega.oxygenna.com/the-beauty-of-the-natural-world-lies-in-the-details/&amp;description=The%20beauty%20of%20the%20world.&amp;media=http://omega.oxygenna.com/wp-content/uploads/2014/04/image-08-normal-150x150.jpg"
+                                                target="_blank" style="background-color:#82c9ed;" data-iconcolor="#C92228">
+                                                    <i class="fa fa-pinterest"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="author-info small-screen-center post-showinfo">
+                            <div class="author-avatar pull-left"></div>
+                            <div class="media-body">
+                                <a href="{% url 'about_family_member' post.author.first_name %}">
+                                    <h3 class="media-heading bordered bordered-small">{{post.author.name}}</h3>
+                                </a>
+                                <div class="media">
+                                    <p>
+                                        {{post.author.bio}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <nav id="nav-below" class="post-navigation post-showinfo">
+                        <ul class="pager">
+                            {% if previous %}
+                            <li class="previous">
+                                <a class="btn btn-primary btn-icon btn-icon-left" rel="prev" href="{% url 'post_view' previous %}">
+                                    <i class="fa fa-angle-left"></i>
+                                    Previous
+                                </a>
+                            </li>
+                            {% endif %}
+                            
+                            {% if request.user.is_staff or post.author == request.user.authorprofile %}
+                                <li>
+                                    <a class="btn btn-primary btn-icon" rel="prev" href="{% url 'edit_post' post.pk %}">
+                                    <i class="fa fa-file-text-o"></i>
+                                    Edit Post
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if request.user.is_staff %}
+                                <li>
+                                    <a class="btn btn-primary btn-icon" rel="prev" href="{% url 'delete_post' post.pk %}">
+                                    <i class="fa fa-ban"></i>
+                                    Delete Post
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if next %}
+                                <li class="next">
+                                    <a class="btn btn-primary btn-icon" rel="prev" href="{% url 'post_view' next %}">
+                                    Next
+                                    <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+
+
+                    <section class="post-related post-showinfo">
+                        <header class="post-related-head">
+                            <h3 class="post-related-title">Related Posts</h3>
+                            <small>Also take a look at these posts</small>
+                            <div class="post-icon">
+                                <i class="fa fa-file-text-o"></i>
+                            </div>
+                        </header>
+                        <div class="row">
+                            {% for related in relatedposts %}
+                                
+                            <div class="col-md-4 col-sm-4">
+                                <article class="post-related-post" style="background-image: url({{ related.post_pic.url }})">
+                                    <h4>
+                    <a href="{% url 'post_view' related.pk %}">
+                            {{related.body_text|truncatechars:50 }}        </a>
+                    <small>
+                    by            {{related.author.name}}        </small>
+                </h4>
+                                </article>
+                            </div>
+
+                            {% endfor %}        
+                        </div>
+                    </section>
+                    <div class="comments padded post-showinfo" id="comments">
+                        <div class="comments-head">
+                            <h3>
+                                {{ num_comments }} comment{% if num_comments != 1 %}s{% endif %} 
+        </h3>
+                            <div class="post-icon">
+                                <i class="fa fa-comments"></i>
+                            </div>
+                        </div>
+                        <ul class="comments-list comments-body media-list">
+                            {% for comment in post.comment_set.all %}
+                                <li class="media media-comment">
+                                <div class="comment byuser comment-author-christos bypostauthor even thread-even depth-1 media media-comment">
+                                    
+                                    <div class="media-body">
+                                        <div class="media-inner">
+                                            <div class="comment byuser comment-author-christos bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-32">
+                                                <h4 class="media-heading clearfix bold">
+                                {{comment.commenter_name}}                                    -
+                                {{comment.date_posted}}                                    <span class="comment-reply pull-right">
+                                <a class="comment-reply-link" href="{% url 'post_view' post.pk %}?replytocom=32#respond" onclick="return addComment.moveForm(&quot;comment-32&quot;, &quot;32&quot;, &quot;respond&quot;, &quot;235&quot;)">reply</a>                                    </span>
+                            </h4>
+                                                <p>{{comment.comment_text}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /media body -->
+                                </div>
+                            </li>
+                            {% endfor %}
+                            <!-- /#comment-list -->
+                        </ul>
+                    </div>
+                    <div class="comments-form post-showinfo" id="respond">
+                        <div class="comments-head">
+                            <h3 id="reply-title">Join the conversation <small id="cancel-comment-reply"><a rel="nofollow" id="cancel-comment-reply-link" href="{% url 'post_view' post.pk %}#respond" style="display:none;">Cancel</a></small></h3>
+                            <div class="post-icon">
+                                <i class="fa fa-comment"></i>
+                            </div>
+                        </div>             
+
+                        <form class="comments-body" action="{% url 'post_view' post.pk %}#comments" method = "POST" id="comment_box">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="form-group form-icon-group">
+                                    {{form.author}}
+                                    <i class="fa fa-user"></i>
+                                    
+                                </div>
+                                <div class="form-group form-icon-group">
+                                    {{form.email}}
+                                    <i class="fa fa-envelope"></i>
+                                    
+                                </div>
+                                <div class="form-group form-icon-group">
+                                    {{form.comment}}
+                                    <i class="fa fa-pencil"></i>
+                                </div>
+                                <div class="form-group small-screen-center">
+                                    <div class="controls small-screen-center">
+                                        <button name="submit" type="submit" class="btn btn-primary btn-icon btn-icon-right" id="submit" value="Add comment">
+                                            Add comment <span>
+                        <i class="fa fa-comment"></i>
+                        </span>
+                                        </button>
+                                        <input type="hidden" name="comment_post_ID" value="235" id="comment_post_ID">
+                                        <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+</article>
+    
+{% endblock content %}

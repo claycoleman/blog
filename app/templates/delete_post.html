@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete {{post}}</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete {{post}}?!</h1>
+
+    <h2>Yeah, we're all in agreement your writing could use some work, but it's a valuable memory at the least!</h2>
+
+    <h3>Hit confirm if you really want to go through with this.</h3>
+    <form action="{% url 'delete_post' post.pk %}" method="POST">{% csrf_token %}<input type="submit" value="confirm"></form>
+    <br>
+    <a href="{% url 'home' %}">Back to home</a>
+</body>
+</html>

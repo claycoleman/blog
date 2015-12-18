@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block title %}
+    The Colemans
+{% endblock %}
+
+{% block header-class %}transparent{% endblock header-class %}
+
+{% block swatch-color %}black{% endblock swatch-color %}
+
+{% block content %}
+    <article>
+        <script type="text/javascript">
+        var oxyThemeData = {
+            navbarHeight: 90,
+            navbarScrolled: 70,
+            navbarScrolledPoint: 200,
+            navbarScrolledSwatches:
+            {
+                up: 'swatch-black',
+                down: 'swatch-white'
+            },
+            scrollFinishedMessage: 'No more items to load.',
+            hoverMenu:
+            {
+                hoverActive: false,
+                hoverDelay: 1,
+                hoverFadeDelay: 200
+            }
+        };
+        </script>
+        <section class="section swatch-black section-fullheight">
+            <div class="background-media" style="background-image: url('{% static 'assets/images/uploads/image-42.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: 50% 0%;" data-start="background-position:" data-70-top-bottom="background-position:">
+            </div>
+            <div class="background-overlay grid-overlay-50 " style="background-color: rgba(0,0,0,0.5);"></div>
+            <div class="container-fullwidth">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="divider-wrapper" style="visibility:hide;background-color:#FFFFF">
+                            <div class="visible-xs" style="height:24px;"></div>
+                            <div class="visible-sm" style="height:50px;"></div>
+                            <div class="visible-md" style="height:120px;"></div>
+                            <div class="visible-lg" style="height:120px;"></div>
+                        </div>
+                        <header class="text-center element-short-top element-short-bottom os-animation condensed" data-os-animation="fadeIn" data-os-animation-delay="0s">
+                            <h1 class="hyper hairline bordered-normal">
+            The Colemans
+        </h1>
+                        </header>
+                        <header class="text-center element-no-top element-short-bottom condensed os-animation" data-os-animation="fadeIn" data-os-animation-delay="0.3s">
+                            <h1 class="bigger hairline bordered-normal">
+            we're slightly crazy,
+        </h1>
+                        </header>
+                        <header class="text-center element-no-top element-short-bottom condensed os-animation" data-os-animation="fadeIn" data-os-animation-delay="0.8s">
+                            <h1 class="bigger hairline bordered-normal">
+             we're all over the place,
+        </h1>
+                        </header>
+                        <header class="text-center element-no-top element-short-bottom condensed os-animation" data-os-animation="fadeIn" data-os-animation-delay="1.8s">
+                            <h1 class="bigger hairline bordered-normal">
+            &amp; we're pretty happy
+        </h1>
+                        </header>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="work" class="section swatch-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <header class="text-center element-normal-top element-medium-bottom not-condensed" data-os-animation="fadeIn" data-os-animation-delay="0s">
+                            <h1 class="super hairline bordered-normal">
+            <a href="{% url 'family_post_list' %}">What's New</a>
+        </h1>
+                        </header>
+                        <div class="portfolio-container element-no-top element-normal-bottom">
+                            <div class="portfolio masonry " data-padding="1" data-col-xs="1" data-col-sm="3" data-col-md="3" data-col-lg="3" data-layout="fitRows">
+                            {% for post in posts %}
+                                <div class="masonry-item portfolio-item isotope-item" data-menu-order="{{forloop.counter}}" data-title=" {{post.title}} ">
+                                    <div class="figure element-no-top element-no-bottom text-center figcaption-middle normalwidth image-filter-grayscale fade-in image-filter-onhover" data-os-animation="fadeIn" data-os-animation-delay="0s">
+                                    {% if post.post_pic %}
+                                        
+                                        <a href="{{post.post_pic.url}}" class="figure-image magnific" data-links="
+                 " target="_self">
+                                        {% thumbnail post.post_pic "379x379" crop="center" as im %}
+                                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                    {% endthumbnail %}
+                                            <div class="figure-overlay grid-overlay-20">
+                                                <div class="figure-overlay-container">
+                                                    <span class="figure-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="none"><path d="M50.941 34.953v30.094M65.988 50h-30.093"></path></g></svg>                
+                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section swatch-black section-text-shadow section-inner-shadow">
+            <div class="background-media" style="background-image: url('{% static 'assets/images/uploads/image-42.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: 50% 0%;" data-start="background-position:" data-70-top-bottom="background-position:">
+            </div>
+            <div class="background-overlay grid-overlay-50 " style="background-color: rgba(0,0,0,0.5);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="col-md-4">
+                            <div class="figure element-normal-top element-short-bottom image-filter-none image-filter-onhover fade-none text-center figcaption-middle normalwidth" data-os-animation="fadeInRight" data-os-animation-delay="0s">
+                                <span class="figure-image">
+                <img src="{% static 'assets/images/people/image-17-normal1.jpg' %}" class="normalwidth" alt="Photographer Image">
+           </span>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <header class="element-normal-top element-no-bottom os-animation not-condensed" data-os-animation="fadeInRight" data-os-animation-delay="0s">
+                                <h1 class="normal hairline bordered-normal">
+                About us
+            </h1>
+                            </header>
+                            <p class="lead default element-short-top element-normal-bottom os-animation" data-os-animation="fadeInRight" data-os-animation-delay="0.4s">
+                                The Colemans – known for loud laughs and blue eyes. We think we're really funny. We go <strong>hard</strong>. We love to break the mold. That said, we're also a bit insane. At the end of the day, despite our quirks and our issues, we love life. We hope you enjoy catching up on the Coleman news here!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section swatch-white section-text-shadow section-inner-shadow">
+            
+            <div class="background-overlay grid-overlay-20 "></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <header class="text-center element-normal-top element-medium-bottom not-condensed" data-os-animation="fadeInUp" data-os-animation-delay="0s">
+                            <h1 class="bigger hairline bordered bordered-normal">
+            Fun Facts
+        </h1>
+                        </header>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-sm-6 text-center small-screen-center">
+                        <div class="counter bordered text-default element-short-top element-short-bottom os-animation" data-count="{{married}}" data-format="(,ddd)" data-os-animation="fadeIn" data-os-animation-delay="0s">
+                            <span class="value odometer-counter super hairline">0</span>
+                        </div>
+                        <header class="text-default element-short-top element-no-bottom condensed os-animation" data-os-animation="fadeIn" data-os-animation-delay="0s">
+                            <h2 class="normal hairline bordered-normal">
+            Weeks
+        </h2>
+                        </header>
+                        <header class="text-default element-no-top element-medium-bottom condensed os-animation" data-os-animation="fadeIn" data-os-animation-delay="0s">
+                            <h2 class="normal hairline bordered-normal">
+            as a family
+        </h2>
+                        </header>
+                    </div>
+                    <div class="col-sm-6 text-center small-screen-default">
+                        <div class="counter bordered text-default element-short-top element-short-bottom os-animation" data-count="{{number_of_posts}}" data-format="(,ddd)" data-os-animation="fadeIn" data-os-animation-delay="0s">
+                            <span class="value odometer-counter super hairline">0</span>
+                        </div>
+                        <header class="text-default element-short-top element-no-bottom condensed os-animation" data-os-animation="fadeIn" data-os-animation-delay="0.3s">
+                            <h2 class="normal hairline bordered-normal">
+            Pictures
+        </h2>
+                        </header>
+                        <header class="text-default element-no-top element-medium-bottom condensed os-animation" data-os-animation="fadeIn" data-os-animation-delay="0.3s">
+                            <h2 class="normal hairline bordered-normal">
+            posted
+        </h2>
+                        </header>
+                    </div>
+                   
+            </div>
+        </section>
+    </article>
+{% endblock %}

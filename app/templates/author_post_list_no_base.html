@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entries</title>
+</head>
+<body>
+    <h1>Posts by <em>{{author}}</em></h1>
+    <h4>More about <a href="{% url 'about_author' author.pk %}">{{author}}</a></h4>
+    {% for post in posts %}
+        <h2><a href="{% url 'post_view' post.pk %}">{{post.title}}</a></h2>
+        <h3>{{post.description}}</h3>
+        <h4>{{post.date_posted}}</h4>
+    {% endfor %}
+    <a href="{% url 'post_list' %}">Back to home</a>
+    <a href="{% url 'author_list' %}">Back to list of authors</a>    
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    About {{family_member.name}}
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    
+<article>
+    <section id="two" class="section swatch-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <header class="element-normal-top element-no-bottom not-condensed os-animation" data-os-animation="fadeIn" data-os-animation-delay="0s">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <div class="figure  element-no-top element-no-bottom image-filter-none image-filter-onhover fade-none text-center figcaption-middle normalwidth" data-os-animation="fadeInUp" data-os-animation-delay=".1s">
+                                <span class="figure-image">
+                                {% if family_member.picture %}
+                                    <img src="{{ family_member.picture.url }}" height="300px" width="300px" alt="My Profile">
+                                    
+                                {% else %}
+                                    <img src="{% static 'assets/images/people/image-17-normal1.jpg' %}" class="normalwidth" alt="My Profile">
+                                {% endif %}
+                                </span>
+                            </div>
+                        
+                        </div>
+                        <div class="col-xs-8">
+                            <h1 class="super hairline bordered-normal text-left" style="margin-top: 40px;">{{family_member.user.first_name}} {{family_member.user.last_name}}</h1>
+                        </div>
+                            {% if request.user.authorprofile == family_member %}
+                                <a class="btn btn-success" href='{% url "edit_author_info" %}'>Edit your profile</a>
+                        {% endif %}
+                    </div>
+                        
+
+                    </header>
+                    <hr>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+    <div class="row">
+    <h3>{{family_member.short_description}}</h3>
+    <br>
+    <h4>{{family_member.bio}}</h4>
+    <br>
+    <a href="{% url 'post_list' family_member.instagram %}">Back to {{family_member}}'s posts</a>
+    <br>
+    <a href="{% url 'home' %}">Back to home</a> 
+        
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,204 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock title %}</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,300italic,400italic,600italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href='{% static "assets/css/bootstrap.min.css" %}'>
+        <link rel="stylesheet" href='{% static "assets/css/theme.min.css" %}'>
+        <link rel="stylesheet" href='{% static "assets/css/color-defaults.min.css" %}' media="screen">
+        <link rel="stylesheet" href='{% static "assets/css/swatch-white.min.css" %}' media="screen">
+        <link rel="stylesheet" href='{% static "assets/css/swatch-blue.min.css" %}' media="screen">
+        <link rel="stylesheet" href='{% static "assets/css/swatch-gray.min.css" %}' media="screen">
+        <link rel="stylesheet" href='{% static "assets/css/swatch-black.min.css" %}' media="screen">
+        <link rel="stylesheet" href='{% static "assets/css/swatch-white-black.min.css" %}' media="screen">
+        <link rel="stylesheet" href='{% static "assets/css/fonts.min.css" %}' media="screen">
+        <script type="text/javascript" src="{% static 'assets/js/jquery-1.11.3.min.js' %}"></script>
+
+        {{ form.media }}
+    </head>
+    <body class="{% block header-class %}{% endblock %}-header">
+    
+        <div id="masthead" class="navbar navbar-static-top swatch-{% block swatch-color %}{% endblock swatch-color %} navbar-sticky" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".main-navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <nav class="collapse navbar-collapse main-navbar" role="navigation">
+                    
+                    <!--<div class="menu-sidebar pull-right">
+                        <div id="search-4" class="sidebar-widget  widget_search">
+                            <form role="search" method="get" id="searchform" action="blog-classic.html">
+                                <div class="input-group">
+                                    <input type="text" value="" name="s" id="s" class="form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+                                    <button class="btn" type="submit" id="searchsubmit" value="Search">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div> -->
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>
+                            <!--<a href="{% url 'family_post_list' %}">The Colemans</a>-->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'family_post_list' %}">All Colemans</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="{% url 'post_list' 'jonnycc' %}">Jon</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'post_list' 'adcoleman' %}">AD</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'post_list' 'davidaholyoak' %}">David</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'post_list' 'mckelle' %}">McKelle</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'post_list' 'maddycoleman' %}">Maddy</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'post_list' 'coleclayman' %}">Clay</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'post_list' 'jessicacoleeman' %}">Jessie</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <!--<a href="{% url 'family_post_list' %}">The Colemans</a>-->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url 'about_family_member' 'jon' %}">Jon</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'about_family_member' 'adrianne' %}">AD</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'about_family_member' 'david' %}">David</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'about_family_member' 'mckelle' %}">McKelle</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'about_family_member' 'maddy' %}">Maddy</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'about_family_member' 'clay' %}">Clay</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'about_family_member' 'jessica' %}">Jessie</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="menu-sidebar pull-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.is_authenticated %}
+                                {% if URL %}
+                                    <li><a href="{% if request.user.authorprofile.access_token %}{% url 'loading_insta_pics' %}{% else %}https://api.instagram.com/oauth/authorize/?client_id=d1d543e970404b0badc3a982b4c3d5db&redirect_uri={{ URL }}{% url 'grab_access_token' %}&response_type=code{% endif %}">Update Instagram Pics</a></li>
+                                {% endif %}
+
+                            <li>
+                            <!--<a href="{% url 'family_post_list' %}">The Colemans</a>-->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-haspopup="true" aria-expanded="false">{{ request.user.authorprofile.name }}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a>{{ request.user.authorprofile.instagram }}</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'edit_author_info' %}">My profile</a></li>
+                                <li><a href="{% url 'edit_author_info' %}">Edit my profile</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'logout_user' %}?next={{request.path}}">Log Out</a></li>   
+                            </ul>
+                        </li>
+                            
+                                    
+                            {% else %}
+                            <li><a href="{% url 'login_user' %}?next={{request.path}}">    </a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div id="content">
+            {% block content %}
+            
+            {% endblock content %}
+            <footer id="footer" role="contentinfo">
+                <section class="section swatch-white">
+                    <div class="container">
+                        <div class="row element-normal-top element-normal-bottom">
+                            <div class="col-md-4">
+                                <div id="recent-posts-4" class="sidebar-widget  widget_recent_entries">
+                                    <h3 class="sidebar-header">Recent Posts</h3>
+                                    <ul>
+                                        {% for post in recentposts %}
+                                            <li class="clearfix">
+                                            <div class="post-icon">
+                                                <a href="{% url 'post_view' post.pk %}" title="{{post.title}}">
+                                            {% if post.post_pic %}
+                                                    <img width="150" height="150" src='{{post.post_pic.url}}' class="attachment-thumbnail wp-post-image" alt="image-08-normal">
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                            <a href="{% url 'post_view' post.pk %}" title="{{post.title}}">{{post.author.name}}</a>
+                                            <small class="post-date">
+                                        {{post.date_posted}}
+                                    </small>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="archives-4" class="sidebar-widget  widget_archive">
+                                    <h3 class="sidebar-header">Archives</h3>
+                                    <ul>
+                                        <li><a href="{% url 'monthly_post_list' 2015 11 %}">November 2015</a></li>
+                                        <li><a href="{% url 'monthly_post_list' 2015 10 %}">October 2015</a></li>
+                                        <li><a href="{% url 'monthly_post_list' 2015 '09' %}">September 2015</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="tag_cloud-3" class="sidebar-widget  widget_tag_cloud">
+                                    <h3 class="sidebar-header">Tags</h3>
+                                    <div class="tagcloud">
+                                        <ul>
+                                            {% for tag in tags %}
+                                                <li>
+                                                    <a href="{% url 'tag_post_list' tag.name %}">{{tag.name}}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </footer>
+        </div>
+        <script type="text/javascript" src="{% static 'assets/js/hover.js' %}"></script>
+        <script src='{% static "assets/js/packages.min.js" %}'></script>
+        <script src='{% static "assets/js/theme.min.js" %}'></script>
+    </body>
+</html>

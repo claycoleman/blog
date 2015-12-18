@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Author List!</title>
+</head>
+<body>
+    <h1>Author List!</h1>
+    {% for author in authors %}
+        <h2><a href="{% url 'author_post_list' author.pk %}">{{author}}</a></h2><br>
+        
+    {% endfor %}
+    <br>
+    <a href="{% url 'home' %}">Back to home</a>
+</body>
+</html>

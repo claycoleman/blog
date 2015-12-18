@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    Log in!
+{% endblock title %}
+
+
+
+{% block header-class %}transparent{% endblock header-class %}
+
+{% block swatch-color %}black{% endblock swatch-color %}
+
+{% block content %}
+<article>
+    <script type="text/javascript">
+            var oxyThemeData = {
+                navbarHeight: 90,
+                navbarScrolled: 70,
+                navbarScrolledPoint: 200,
+                navbarScrolledSwatches:
+                {
+                    up: 'swatch-black',
+                    down: 'swatch-white'
+                },
+                scrollFinishedMessage: 'No more items to load.',
+                hoverMenu:
+                {
+                    hoverActive: false,
+                    hoverDelay: 1,
+                    hoverFadeDelay: 200
+                }
+            };
+
+    </script>
+    <section class="section swatch-black section-text-shadow section-inner-shadow">
+        <div class="background-media" style="background-image: url('{% static 'assets/images/uploads/image-42.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: 50% 40%;" data-start="background-position:"
+        data-70-top-bottom="background-position:">
+        </div>
+        <div class="background-overlay grid-overlay-30 " style="background-color: rgba(0,0,0,0.3);"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <header class="blog-header text-left element-normal-top element-normal-bottom not-condensed" data-os-animation="fadeInUp" data-os-animation-delay=".4s">
+                        <h1 class="blog-header-title super hairline medium-top">
+        Log in
+    </h1>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="two" class="section swatch-white">
+        <div class="container">
+            <div class="row element-normal-top element-normal-bottom">
+                <div class="col-md-9">
+                    <article class=" post post-showinfo">
+                        <div class="post-media">
+                            <div class="figure  element-no-top element-normal-bottom image-filter-none image-filter-onhover fade-in text-center figcaption-middle normalwidth" data-os-animation="none" data-os-animation-delay="0s">
+                                <a href="{{post.post_pic.url}}" class="figure-image magnific" data-links="" target="_self">
+                                    <img src="{{post.post_pic.url}}" alt="" class="normalwidth">
+                                    <div class="figure-overlay grid-overlay-0">
+                                        <div class="figure-overlay-container">
+                                            <span class="figure-icon">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <g>
+                                    <line display="inline" fill="none" stroke-width="1" stroke-miterlimit="10" x1="50.941" y1="34.953" x2="50.941" y2="65.047"></line>
+                                    <line display="inline" fill="none" stroke-width="1" stroke-miterlimit="10" x1="65.988" y1="50" x2="35.895" y2="50"></line>
+                                </g>
+                            </svg>
+                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <header class="post-head">
+                            <h1 class="post-title">
+        </h1>
+
+    <div class="comments-form post-showinfo" id="respond">
+        <div class="comments-head">
+            <h3 id="reply-title">Log in here, Colemans!</h3>
+            <div class="post-icon">
+                <i class="fa fa-comment"></i>
+            </div>
+        </div>             
+
+        <form class="comments-body" action="{% url 'login_user' %}" method = "POST" id="login_box">
+            {% csrf_token %}
+            <fieldset>
+                <div class="form-group form-icon-group">
+                    {{form.username}}
+                    <i class="fa fa-user"></i>
+                    
+                </div>
+                <div class="form-group form-icon-group">
+                    {{form.password}}
+                    <i class="fa fa-lock"></i>
+                    
+                    {{form.next_page}}
+                </div>
+                <div class="form-group small-screen-center">
+                    <div class="controls small-screen-center">
+                        <button name="submit" type="submit" class="btn btn-primary btn-icon btn-icon-right" id="submit" value="Log in">
+                            Log in <span>
+        <i class="fa fa-envelope"></i>
+        </span>
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+        
+    <a href="{% url 'home' %}">Back to home</a>
+</article>
+{% endblock %}

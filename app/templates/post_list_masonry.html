@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+    {% if author %}@{{author.instagram}}{% else %}the Colemans{% endif %} 
+{% endblock %}
+
+{% block header-class %}transparent{% endblock header-class %}
+
+{% block swatch-color %}black{% endblock swatch-color %}
+
+{% block content %}
+
+<article>
+                <script type="text/javascript">
+                var oxyThemeData = {
+                    navbarHeight: 90,
+                    navbarScrolled: 70,
+                    navbarScrolledPoint: 200,
+                    navbarScrolledSwatches:
+                    {
+                        up: 'swatch-black',
+                        down: 'swatch-white'
+                    },
+                    scrollFinishedMessage: 'No more items to load.',
+                    hoverMenu:
+                    {
+                        hoverActive: false,
+                        hoverDelay: 1,
+                        hoverFadeDelay: 200
+                    }
+                };
+                </script>
+                <section class="section swatch-black section-text-shadow section-inner-shadow">
+                    <div class="background-media" style="background-image: url('assets/images/uploads/image-08-normal.jpg'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: 50% 40%;" data-start="background-position:"
+                    data-70-top-bottom="background-position:">
+                    </div>
+                    <div class="background-overlay grid-overlay-30 " style="background-color: rgba(0,0,0,0.3);"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <header class="text-center  element-tall-top element-medium-bottom not-condensed os-animation" data-os-animation="fadeInUp" data-os-animation-delay=".4s">
+                                    <h1 class="super light bordered bordered-normal">
+                    Posts from {% if author %}@{{author.instagram}}{% else %}the Colemans{% endif %} 
+                </h1>
+                                </header>
+                                <div class="masonry blog-masonry use-masonry isotope  element-tall-top element-tall-bottom" data-padding="12" data-col-xs="1" data-col-sm="2" data-col-md="4" data-col-lg="4">
+                                
+                                {% for post in posts %}
+                                    <article class="post-masonry masonry-item masonry-{% if forloop.counter0|divisibleby:4 %}wide{% else %}normal{% endif %} isotope-item" data-menu-order="{{ forloop.counter0 }}">
+                                        <div class="post-masonry-inner blog-os-animation" data-os-animation="fadeIn" data-os-animation-delay="0.1s">
+                                            <a class="post-masonry-content swatch-white" href="{% url 'post_view' post.pk %}">
+                                            {% if post.post_pic %}
+                                                <img alt="some image" src="{{ post.post_pic.url }}">
+                                            {% endif %}
+                                                <div class="post-head small-screen-center">
+                                                    <small> 
+               {{post.date_posted}} {% if not author.instagram %}by {{post.author.name}}{% endif %}
+            </small>
+                                                </div>
+                                                <p class="post-body">
+                                                    {{post.body_text}}
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </article>
+                                {% endfor %}
+                                
+                                    
+                                   
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+                {% if request.user.is_staff or request.user == author.user %}<a href="{% url 'create_post' %}">Create a new post</a>{% endif %}
+            </article>
+{% endblock %}
